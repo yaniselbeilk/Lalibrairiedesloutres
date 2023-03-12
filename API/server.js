@@ -1,30 +1,22 @@
-const express = require("express");
-// const bodyParser = require("body-parser"); /* deprecated */
-const cors = require("cors");
-
+import { User } from './app/models/db.js';
+import express from 'express';
+//const express = require("express");
 const app = express();
+const port = 3000;
 
-var corsOptions = {
-  origin: "http://127.0.0.1:5173"
-};
+// Initialize publication server
+app.get("/", async (req, res) =>  {
+  const users = await User.findAll();
+  console.log("users", users);
 
-app.use(cors(corsOptions));
+  const usersDisplay = users.map((user) => {
+    return `${user.dataValues.pseudo} - ${user.dataValues.email}`;
+  });
 
-// parse requests of content-type - application/json
-app.use(express.json()); /* bodyParser.json() is deprecated */
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true })); /* bodyParser.urlencoded() is deprecated */
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.send(usersDisplay.join('\n\n\n'));
 });
 
-require("./app/routes/tutorial.routes.js")(app);
-
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+app.listen(port, () => {
+  console.log("Server listening on :", port);
 });
+
