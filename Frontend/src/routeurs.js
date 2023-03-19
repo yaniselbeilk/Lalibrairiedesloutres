@@ -1,5 +1,5 @@
 import Home from './components/Home.vue';
-import FromText from './components/FromText.vue';
+import Inscription from './components/Inscription.vue'
 
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -10,9 +10,9 @@ const routes = [
     path: '/'
   },
   {
-    name: 'FromText',
-    component: FromText,
-    path: '/from'
+    name: 'Inscription',
+    component: Inscription,
+    path: '/inscription'
   }
 ];
 
