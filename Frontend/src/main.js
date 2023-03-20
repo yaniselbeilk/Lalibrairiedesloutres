@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
-import Home from './components/Home.vue'
+import Index from './components/Index.vue'
 import router from './routeurs.js'
 
 import './assets/main.css'
 
-createApp(Home)
+createApp(Index)
   .use(router)
   .mount('#app')
