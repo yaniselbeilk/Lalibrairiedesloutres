@@ -4,10 +4,7 @@ env.config();
 
 const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PASSWORD, {
   HOST: process.env.HOST,
-  dialect: 'mariadb',
-  dialectOptions: {
-    socketPath: '/var/run/mysqld/mysqld.sock'
-  }
+  dialect: 'mariadb'
 });
 
 // Teste la connection de la base de donnée
