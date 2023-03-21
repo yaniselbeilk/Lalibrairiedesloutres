@@ -1,12 +1,8 @@
 ## Project setup
 ```sh
 npm install
-```
-
-### Autorisé le front a utiliser avec l'API
-```sh
-API/server.js
-origin = url:port
+#Pour le hash du mot de passe
+npm install bcrypt --save
 ```
 
 ### Run
