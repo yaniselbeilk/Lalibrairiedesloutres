@@ -1,7 +1,7 @@
 import { ListeSouhait } from '../models/db.js';
 
 export async function CreateSouhait(req, res) {
-  ListeSouhait.create({
+  await ListeSouhait.create({
     livre_id: req.body.livre_id,
     utilisateur_id: req.body.utilisateur_id
   }).then(function (item) {
