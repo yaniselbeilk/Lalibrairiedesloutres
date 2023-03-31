@@ -45,6 +45,20 @@ export const User = sequelize.define('utilisateurs', {
   timestamps: false
 });
 
+export const ListeSouhait = sequelize.define("liste_souhait", {
+  livre_id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true
+  },
+  utilisateur_id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true
+  }
+}, {
+  tableName: 'liste_souhait',
+  timestamps: false
+})
+
 /*
 (async () => {
   const users = await User.findAll();
