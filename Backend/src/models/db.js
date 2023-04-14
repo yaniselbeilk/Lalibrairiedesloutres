@@ -21,7 +21,8 @@ export const User = sequelize.define('utilisateurs', {
   // Model attributes are defined here
   id: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   date_inscription: {
     type: DataTypes.TIME
