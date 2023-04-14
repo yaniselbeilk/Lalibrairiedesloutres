@@ -1,6 +1,7 @@
-import { ListeSouhait } from '../models/db.js';
+import { ListeSouhait } from '../models/db';
+import { Router, Request, Response } from 'express'
 
-export async function GetListSouhait(req, res) {
+export async function GetListSouhait(req: Request, res: Response) {
   const souhaits = await ListeSouhait.findAll({ where: { utilisateur_id: req.params.id } });
   const souhaitsDisplay = souhaits.map((souhait) => {
     return {
