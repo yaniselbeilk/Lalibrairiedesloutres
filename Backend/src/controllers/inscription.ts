@@ -1,7 +1,8 @@
 import { User } from '../models/db.js';
+import { Request, Response } from 'express'
 import bcrypt from 'bcrypt';
 
-export async function inscription(req, res) {
+export async function inscription(req: Request, res: Response) {
   const IfExistUser = await User.findOne({
     where: { pseudo: req.body.pseudo }
   })
@@ -19,7 +20,10 @@ export async function inscription(req, res) {
           email: req.body.email,
           mot_de_passe: hash
         }).then(function (item) {
-          res.send({ "success": "Inscription effecuté" })
+          res.send({
+            "success": "Inscription effecuté",
+            "utilisateur_id": item.toJSON().id
+          })
         }).catch(function (err) {
           res.send({ "error": err });
         })

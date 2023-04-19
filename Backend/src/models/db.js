@@ -5,9 +5,6 @@ env.config();
 const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PASSWORD, {
   HOST: process.env.HOST,
   dialect: 'mariadb'
-  // ,dialectOptions: {
-  //   socketPath: '/var/run/mysqld/mysqld.sock'
-  // }
 });
 
 // Teste la connection de la base de donnée
@@ -24,7 +21,8 @@ export const User = sequelize.define('utilisateurs', {
   // Model attributes are defined here
   id: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   date_inscription: {
     type: DataTypes.TIME
