@@ -2,3 +2,4 @@ node_modules
 database.sql
 config
 .env
+controllers/auth-controllers.ts
