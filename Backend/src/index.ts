@@ -1,6 +1,7 @@
 console.log('Hello world!')
 
 import express from 'express';
+import cors from 'cors'
 import { connexion } from './controllers/connexion'
 import { GetListSouhait } from './controllers/getlistsouhait'
 import { CreateSouhait } from './controllers/createsouhait';
@@ -16,6 +17,12 @@ const app = express();
 app.use(express.json())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+var corsOptions = {
+  origin: "http://127.0.0.1:5173"
+};
+app.use(cors(corsOptions));
+
 const port = 3000;
 
 
@@ -38,7 +45,7 @@ app.get("/get_list_souhait/:id", GetListSouhait);
 app.post("/add_souhait", CreateSouhait);
 
 //URL permettant d'enlevé un souhait
-app.delete("/remove_souhait", RemoveSouhait);
+app.post("/remove_souhait", RemoveSouhait);
 
 //URL pour la connexion avec Google
 app.get('/api/session/oauth/google', googleOauthHandler);
