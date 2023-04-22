@@ -24,13 +24,19 @@
 }
 
 .book-details__info {
-  width: 50%;
+  width: 70%;
 }
 
 .book-details__info h2 {
   font-size: 28px;
   font-family: 'Roboto', sans-serif;
-  margin-bottom: 20px;
+  color: #0074C6;
+}
+a.book-details_link:visited{
+  color: #0074C6;
+}
+a.book-details_link:hover{
+  text-decoration: underline;
 }
 
 .book-details__info p {
@@ -93,29 +99,26 @@
 }
 
 /* Styles pour le bouton favoris */
-
-/* Styles pour le bouton favoris */
-
 .favorite-button {
   display: inline-block;
   padding: 5px 10px;
-  background-color: #ddd;
   border: none;
-  border-radius: 3px;
-  color: #333;
+  border-radius: 20px;
   font-size: 14px;
   cursor: pointer;
 }
 
-.favorite-button.active {
-  background-color: #00b0ff;
+.favorite-button-add{
+  background-color: #ACCBFD;
+}
+.favorite-button-add:hover{
+  background-color: #CFE0F9;
 }
 
-.favorite-button.active span {
-  background-color: green;
-  color: #fff;
+.favorite-button-remove{
+  background-color: #df1b1b;
+  color:white;
 }
-
-.favorite-button.active:active {
-  background-color: red;
+.favorite-button-remove:hover{
+  background-color: #FF4C4C;
 }

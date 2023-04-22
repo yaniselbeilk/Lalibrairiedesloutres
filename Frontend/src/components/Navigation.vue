@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <img src="ressources/logo-loutre.png" alt="Un logo de loutre" width="96" height="96">
+    <img src="./../assets/logo-loutre.png" alt="Un logo de loutre" width="96" height="96">
     <div id="menu">
       <router-link to="/"><span class="link">Accueil</span></router-link>
       <span class="link">Recherche</span>

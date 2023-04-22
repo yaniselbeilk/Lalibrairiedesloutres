@@ -1,14 +1,32 @@
 <template>
-  <div class="book-details">
+  <div class="backgroundImage">
+    <img src="../assets/plancher-bois-brun.jpg">
+  </div>
+  <span style="display: inline-block; padding-top: 120px;"></span>
+  <div class="book-details each-book-souhait">
     <div class="book-details__image-container">
       <img v-bind:src="dataBook.volumeInfo.imageLinks.thumbnail" alt="Image du livre" />
     </div>
     <div class="book-details__info">
-      <h2>{{dataBook.volumeInfo.title}}</h2>
+      <div style="display: flex; margin-bottom: 20px;">
+        <h2 style="width:100%;">{{ dataBook.volumeInfo.title }}</h2>
+        <div class="book-details__favorite">
+          <span v-if="!selected">
+            <button class="favorite-button favorite-button-add" v-on:click="addToListSouhait()">
+              <span>Ajouter à mes souhaits</span>
+            </button>
+          </span>
+          <span v-if="selected">
+            <button class="favorite-button favorite-button-remove" v-on:click="removeToListSouhait()">
+              <span>Supprimer de mes souhaits</span>
+            </button>
+          </span>
+        </div>
+      </div>
       <p class="book-details__synopsis" v-html="dataBook.volumeInfo.description"></p>
       <p class="book-details__author">
         par
-        <label v-for="authors in dataBook.volumeInfo.authors">{{authors}}</label>
+        <label v-for="authors in dataBook.volumeInfo.authors">{{ authors }}</label>
       </p>
       <p class="book-details__publication-date">Publié le {{ dataBook.volumeInfo.publishedDate }}</p>
       <div class="book-details__stats">
@@ -38,19 +56,6 @@
         <div class="book-details__stat">
           <span class="book-details__label">Pays de vente : </span>
           <span class="book-details__value">{{ dataBook.saleInfo.country }}</span>
-        </div>
-        <div class="book-details__favorite">
-          <span v-if="!selected">
-            <button class="favorite-button" v-on:click="addToListSouhait()">
-              <span>Ajouter à ma liste de souhait</span>
-            </button>
-          </span>
-          <span v-if="selected">
-            <p>Vous avez ajouter ce livre a votre liste de souhait</p>
-            <button class="favorite-button" v-on:click="removeToListSouhait()">
-                <span>Supprimer de ma liste de souhait</span>
-              </button>
-          </span>
         </div>
       </div>
     </div>

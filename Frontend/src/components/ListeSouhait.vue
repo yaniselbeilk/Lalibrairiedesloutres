@@ -1,4 +1,4 @@
-<template>
+<template :key="ListeSouhait">
   <div class="backgroundImage">
     <img src="../assets/librairie1.png">
   </div>
@@ -16,15 +16,24 @@
         </div>
         <!-- Partie droite (informations) -->
         <div class="book-details__info">
-          <h2><a v-bind:href="'/OneBook/'+book.id" target="_blank">
-            {{ book.volumeInfo.title }}
-          </a></h2>
+          <div style="display: flex; margin-bottom: 20px;">
+            <h2 style="margin-bottom: 20px; width:100%;">
+              <a v-bind:href="'/OneBook/' + book.id" target="_blank" class="book-details_link">
+                {{ book.volumeInfo.title }}
+              </a>
+            </h2>
+            <div class="book-details__favorite">
+              <button class="favorite-button favorite-button-remove" v-on:click="removeToListSouhait(book.id)">
+                <span>Supprimer de mes souhaits</span>
+              </button>
+            </div>
+          </div>
           <p class="book-details__publication-date">Publié le {{ book.volumeInfo.publishedDate }}</p>
           <div class="book-details__stat">
             <span class="book-details__label">Catégorie :</span>
             <span class="book-details__value" v-for="categorie in book.volumeInfo.categories">{{ categorie }}</span>
           </div>
-           <div class="book-details__stat">
+          <div class="book-details__stat">
             <span class="book-details__label">Pages :</span>
             <span class="book-details__value">{{ book.volumeInfo.printedPageCount }}</span>
           </div>
@@ -45,8 +54,8 @@ export default {
     }
   },
   methods: {
-    GetListSouhait() {
-      let that = this;
+    GetListSouhait(that) {
+      that.dataSouhait = [];
       const ApiKey = import.meta.env.VITE_KEY_API_GOOGLE;
       axios.get(import.meta.env.VITE_URL_BACKEND + '/get_list_souhait/' + $cookies.get("connexion"), {})
         .then(function (response) {
@@ -62,10 +71,24 @@ export default {
             });
           }
         });
+    },
+    removeToListSouhait(Id_Livre) {
+      let that = this;
+      axios.post(import.meta.env.VITE_URL_BACKEND + '/remove_souhait', {
+        livre_id: Id_Livre,
+        utilisateur_id: $cookies.get("connexion")
+      }).then(function (response) {
+        if (Object.keys(response.data).includes("error")) {
+          console.log(response.data.error);
+        } else {
+          console.log(response.data.success);
+          that.GetListSouhait(that);
+        }
+      });
     }
   },
   created() {
-    this.GetListSouhait();
+    this.GetListSouhait(this);
   }
 }
 </script>
