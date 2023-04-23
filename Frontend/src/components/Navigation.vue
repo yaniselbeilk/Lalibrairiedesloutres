@@ -1,18 +1,46 @@
 <template>
   <nav>
-    <img src="ressources/logo-loutre.png" alt="Un logo de loutre" width="96" height="96">
+    <img src="./../assets/logo-loutre.png" alt="Un logo de loutre" width="96" height="96">
     <div id="menu">
-      <router-link to="/"><span>Accueil</span></router-link>
-      <span>Recherche</span>
-      <span>Notre Équipe!</span>
+      <router-link to="/"><span class="link">Accueil</span></router-link>
+      <span class="link">Recherche</span>
+      <span class="link">Notre Équipe!</span>
     </div>
-    <div id="login">
-      <IconBooks></IconBooks>
-      <router-link to="/Inscription"><span>Inscription</span></router-link>
-      <span>Connexion</span>
+    <div id="login" v-if="!islogin">
+      <router-link to="/Inscription"><span class="link">Inscription</span></router-link>
+      <router-link to="/connexion"><span class="link">Connexion</span></router-link>
+    </div>
+    <div id="login" v-if="islogin">
+      <router-link to="/Liste-Souhait"><span class="link">Liste de souhait</span></router-link>
+      <span class="link">
+        <p v-on:click="deconnexion()" class="deconnexion">Déconnexion</p>
+      </span>
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  name: 'nav',
+  data() {
+    return {
+      islogin: false
+    }
+  },
+  methods: {
+    deconnexion() {
+      $cookies.remove("connexion");
+      this.islogin = false;
+    }
+  },
+  created() {
+    if($cookies.get("connexion") != null) {
+      this.islogin = true;
+    }
+  }
+}
+</script>
+
 <style>
 nav {
   position: fixed;
@@ -33,16 +61,26 @@ nav {
   display: flex;
   align-items: center;
 }
-#menu>span,
-#login>span {
-  margin: 0px 10px;
-  padding: 10px;
-  color:  var(--vt-c-black-soft);
-  border-radius: 15px;
+
+a{
+  text-decoration: none;
 }
 
-#menu>span:hover, #login> span:hover {
+.link{
+  margin: 0px 10px;
+  padding: 10px;
+  border-radius: 15px;
+  color:var(--vt-c-black-soft);
+}
+.link:hover {
   cursor: pointer;
   color: var(--vt-c-blue);
+}
+.link:visited{
+  color: black;
+}
+
+.deconnexion{
+  cursor: pointer;
 }
 </style>
