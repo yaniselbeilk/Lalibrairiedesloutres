@@ -1,4 +1,4 @@
-import config from '../config/custom-environment-variables';
+import config from '../../config/custom-environment-variables';
 import axios from 'axios';
 import qs from 'qs';
 import env from "dotenv";

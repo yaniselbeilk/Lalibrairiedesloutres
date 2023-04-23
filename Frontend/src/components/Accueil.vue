@@ -2,13 +2,35 @@
   <header>
     <div id="bienvenue">
       <h1>Bienvenue dans la librairie des loutres !</h1>
-      <form>
-        <input type="text" placeholder="Rechercher une oeuvre" />
+      <form v-on:submit.prevent="getBooks()">
+        <input type="text" class="recherche" v-model="search" placeholder="Rechercher une oeuvre">
       </form>
     </div>
   </header>
 </template>
-
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      search: '',
+      books: {}
+    }
+  },
+  methods: {
+  getBooks() {
+  axios.get('https://www.googleapis.com/books/v1/volumes?q='+this.search)
+  .then(response => {
+    console.log(response.data);
+    this.books = response.data.items;
+  })
+  .catch(error => {
+    console.log(error);
+  });
+    }
+  }
+}
+</script>
 <style>
 header {
   font-family: acme;

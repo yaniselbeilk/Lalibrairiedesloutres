@@ -3,7 +3,7 @@
     <img src="./../assets/logo-loutre.png" alt="Un logo de loutre" width="96" height="96">
     <div id="menu">
       <router-link to="/"><span class="link">Accueil</span></router-link>
-      <span class="link">Recherche</span>
+      <router-link to="/recherche"><span class="link">Recherche</span></router-link>
       <span class="link">Notre Équipe!</span>
     </div>
     <div id="login" v-if="!islogin">
