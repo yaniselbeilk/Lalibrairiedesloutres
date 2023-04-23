@@ -2,4 +2,6 @@ node_modules
 database.sql
 config
 .env
-controllers/auth-controllers.ts
+src/controllers/auth-controller.ts
+src/models/db.js
+src/service/session.service.ts

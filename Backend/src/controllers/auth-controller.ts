@@ -1,6 +1,6 @@
 import { getGoogleOauthToken, getGoogleUser } from '../service/session.service';
 import { findAndUpdateUser } from '../service/user.service';
-import config from '../config/custom-environment-variables';
+import config from '../../config/custom-environment-variables';
 import { Request, Response } from 'express'
 
 export const googleOauthHandler = async (

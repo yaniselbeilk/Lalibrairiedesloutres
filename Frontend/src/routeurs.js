@@ -1,4 +1,5 @@
-import Home from './components/Home.vue';
+import Accueil from './components/Accueil.vue';
+import Recherche from './components/Recherche.vue';
 import Inscription from './components/Inscription.vue';
 import ConnexionGoogle from './components/ConnexionGoogle.vue';
 import ConnexionManuel from './components/ConnexionManuel.vue';
@@ -9,9 +10,14 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
-    name: 'Home',
-    component: Home,
+    name: 'Accueil',
+    component: Accueil,
     path: '/'
+  },
+  {
+    name: 'Recherche',
+    component: Recherche,
+    path: '/recherche'
   },
   {
     name: 'Inscription',
