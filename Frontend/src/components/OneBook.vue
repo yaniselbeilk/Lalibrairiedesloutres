@@ -5,7 +5,12 @@
   <span style="display: inline-block; padding-top: 120px;"></span>
   <div class="book-details each-book-souhait">
     <div class="book-details__image-container">
-      <img v-bind:src="dataBook.volumeInfo.imageLinks.thumbnail" alt="Image du livre" />
+      <span v-if="dataBook.volumeInfo.imageLinks != undefined">
+        <img v-bind:src="dataBook.volumeInfo.imageLinks.thumbnail" alt="Image du livre" />
+      </span>
+      <span v-if="dataBook.volumeInfo.imageLinks == undefined">
+        <p>Image non trouvé</p>
+      </span>
     </div>
     <div class="book-details__info">
       <div style="display: flex; margin-bottom: 20px;">
@@ -23,37 +28,37 @@
           </span>
         </div>
       </div>
-      <p class="book-details__synopsis" v-html="dataBook.volumeInfo.description"></p>
-      <p class="book-details__author">
+      <p class="book-details__synopsis" v-html="dataBook.volumeInfo.description" v-if="dataBook.volumeInfo.description != undefined"></p>
+      <p class="book-details__author" v-if="dataBook.volumeInfo.authors != undefined">
         par
         <label v-for="authors in dataBook.volumeInfo.authors">{{ authors }}</label>
       </p>
-      <p class="book-details__publication-date">Publié le {{ dataBook.volumeInfo.publishedDate }}</p>
+      <p class="book-details__publication-date" v-if="dataBook.volumeInfo.printedPageCount != undefined">Publié le {{ dataBook.volumeInfo.publishedDate }}</p>
       <div class="book-details__stats">
-        <div class="book-details__stat">
+        <div class="book-details__stat" v-if="dataBook.volumeInfo.printedPageCount != undefined">
           <span class="book-details__label">Pages :</span>
           <span class="book-details__value">{{ dataBook.volumeInfo.printedPageCount }}</span>
         </div>
-        <div class="book-details__stat">
+        <div class="book-details__stat" v-if="dataBook.volumeInfo.categories != undefined">
           <span class="book-details__label">Catégorie :</span>
           <span class="book-details__value" v-for="categorie in dataBook.volumeInfo.categories">{{ categorie }}</span>
         </div>
-        <div class="book-details__stat">
+        <div class="book-details__stat" v-if="dataBook.volumeInfo.language != undefined">
           <span class="book-details__label">Langue :</span>
           <span class="book-details__value">{{ dataBook.volumeInfo.language }}</span>
         </div>
-        <div class="book-details__stat">
+        <div class="book-details__stat" v-if="dataBook.saleInfo.listPrice =! undefined">
           <span class="book-details__label">Prix : </span>
           <span class="book-details__value">{{ dataBook.saleInfo.listPrice.amount }}€</span>
         </div>
-        <div class="book-details__stat">
+        <div class="book-details__stat" v-if="dataBook.saleInfo.isEbook != undefined">
           <span class="book-details__label">Ebook ? : </span>
           <span class="book-details__value">
             <label v-if="dataBook.saleInfo.isEbook">Oui</label>
             <label v-if="!dataBook.saleInfo.isEbook">Non</label>
           </span>
         </div>
-        <div class="book-details__stat">
+        <div class="book-details__stat" v-if="dataBook.saleInfo.country != undefined">
           <span class="book-details__label">Pays de vente : </span>
           <span class="book-details__value">{{ dataBook.saleInfo.country }}</span>
         </div>
