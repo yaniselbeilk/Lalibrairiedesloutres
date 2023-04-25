@@ -19,6 +19,7 @@
             <h2>Auteur(s)</h2>
 
             <span v-for="author in item.volumeInfo.authors">{{ author }}, </span>
+            <a v-bind:href="'/OneBook/'+item.id" target="_blank">voir les détails</a>
         </div>
     </div>
   </main>
